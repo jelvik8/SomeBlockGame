@@ -1,8 +1,8 @@
 public class Main implements Runnable
 {
     public Thread game;
-    public static Window window;
-    public static final int WIDTH = 1280, HEIGHT = 760;
+    public Window window;
+    public final int WIDTH = 1280, HEIGHT = 760;
 
     public void start()
     {
@@ -10,7 +10,7 @@ public class Main implements Runnable
         game.start();
     }
 
-    public static void init()
+    public void init()
     {
         //System.out.println("Initializing GAME!");
         window = new Window(WIDTH, HEIGHT, "Minecraft Clone");
