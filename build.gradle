@@ -10,7 +10,7 @@ repositories {
     mavenCentral()
 }
 
-def lwjglVersion = "3.3.8"
+def lwjglVersion = "3.3.6"
 
 application {
     mainClass = 'Main' // Replace with your actual main class if it's different
