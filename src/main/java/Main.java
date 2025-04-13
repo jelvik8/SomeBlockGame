@@ -11,19 +11,21 @@ public class Main implements Runnable {
     }
 
     public void init() {
-        //System.out.println("Initializing GAME!");
         window = new Window(WIDTH, HEIGHT, "Minecraft Clone");
+        window.setBackgroundColour(0, 0.5f, 1.0f);
+        //window.setFullscreen(true);
         window.create();
     }
 
     public void run() {
         init();
 
-        while (!window.shouldClose() ) {
+        while (!window.shouldClose() && !Input.isKeyDown(GLFW.GLFW_KEY_ESCAPE)) {
             update();
             render();
-
-            if (Input.isKeyDown(GLFW.GLFW_KEY_ESCAPE)) return;
+            if (Input.isKeyDown(GLFW.GLFW_KEY_F11)) {
+                window.setFullscreen(!window.isFullscreen());
+            }
         }
         window.free();
     }
