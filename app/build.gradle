@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.main'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+def lwjglVersion = "3.3.6"
+
+application {
+    mainClass = 'org.main.Main' // Replace with your actual main class if it's different
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // LWJGL core libraries
+    implementation "org.lwjgl:lwjgl:$lwjglVersion"
+    implementation "org.lwjgl:lwjgl-glfw:$lwjglVersion"
+    implementation "org.lwjgl:lwjgl-opengl:$lwjglVersion"
+
+    // Native libraries for your platform
+    if (org.gradle.internal.os.OperatingSystem.current().isMacOsX()) {
+        runtimeOnly "org.lwjgl:lwjgl:$lwjglVersion:natives-macos-arm64"
+        runtimeOnly "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-macos-arm64"
+        runtimeOnly "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-macos-arm64"
+    } else if (org.gradle.internal.os.OperatingSystem.current().isLinux()) {
+        runtimeOnly "org.lwjgl:lwjgl:$lwjglVersion:natives-linux"
+        runtimeOnly "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-linux"
+        runtimeOnly "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-linux"
+    } else if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        runtimeOnly "org.lwjgl:lwjgl:$lwjglVersion:natives-windows"
+        runtimeOnly "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-windows"
+        runtimeOnly "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-windows"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
