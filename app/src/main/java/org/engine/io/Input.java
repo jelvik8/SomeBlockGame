@@ -1,6 +1,10 @@
-package org.main;
+package org.engine.io;
 
-import org.lwjgl.glfw.*;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
+import org.lwjgl.glfw.GLFWScrollCallback;
 
 public class Input {
     private static boolean[] keys = new boolean[GLFW.GLFW_KEY_LAST];
