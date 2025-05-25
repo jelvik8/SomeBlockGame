@@ -2,15 +2,20 @@ package org.main;
 
 import org.engine.graphics.Mesh;
 import org.engine.graphics.Renderer;
+import org.engine.graphics.Shader;
 import org.engine.graphics.Vertex;
 import org.engine.io.*;
 import org.engine.maths.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
+
+import java.io.IOException;
+
 public class Main implements Runnable {
     public Thread game;
     public Window window;
     public Renderer renderer;
+    public Shader shader;
     public final int WIDTH = 1280, HEIGHT = 760;
 
     public Mesh mesh =
@@ -31,13 +36,17 @@ public class Main implements Runnable {
         game.start();
     }
 
-    public void init() {
+    public void init(){
         window = new Window(WIDTH, HEIGHT, "Minecraft Clone");
-        renderer = new Renderer();
+
+        shader = new Shader("/shaders/mainVertex.glsl", "/shaders/mainFragment.glsl");
+
+        renderer = new Renderer(shader);
         window.setBackgroundColour(0, 0.5f, 1.0f);
         // window.setFullscreen(true);
         window.create();
         mesh.create();
+        shader.create();
     }
 
     public void run() {
