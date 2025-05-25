@@ -1,10 +1,8 @@
 package org.main;
 
-import org.engine.graphics.Mesh;
-import org.engine.graphics.Renderer;
-import org.engine.graphics.Shader;
-import org.engine.graphics.Vertex;
+import org.engine.graphics.*;
 import org.engine.io.*;
+import org.engine.maths.Vector2f;
 import org.engine.maths.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
@@ -21,15 +19,15 @@ public class Main implements Runnable {
     public Mesh mesh =
             new Mesh(
                     new Vertex[] {
-                        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f)),
-                        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f)),
-                        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f)),
-                        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f))
+                        new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f), new Vector3f(1.0f, 0.0f, 0.0f), new Vector2f(0.0f, 0.0f)),
+                        new Vertex(new Vector3f(0.5f, 0.5f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f), new Vector2f(1.0f, 0.0f)),
+                        new Vertex(new Vector3f(0.5f, -0.5f, 0.0f), new Vector3f(0.0f, 0.0f, 1.0f), new Vector2f(1.0f, 1.0f)),
+                        new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f), new Vector3f(1.0f, 1.0f, 0.0f), new Vector2f(0.0f, 1.0f))
                     },
                     new int[] {
                         0, 1, 2,
                         0, 3, 2
-                    });
+                    }, new Material("/textures/beautiful.png"));
 
     public void start() {
         game = new Thread(this, "game");
@@ -59,7 +57,7 @@ public class Main implements Runnable {
                 window.setFullscreen(!window.isFullscreen());
             }
         }
-        window.free();
+        close();
     }
 
     // Main loop
@@ -74,6 +72,12 @@ public class Main implements Runnable {
     private void render() {
         renderer.renderMesh(mesh);
         window.swapBuffers();
+    }
+
+    private void close() {
+        window.free();
+        mesh.free();
+        shader.free();
     }
 
     public static void main(String[] args) {

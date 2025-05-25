@@ -1,10 +1,14 @@
-#version 330 core
+#version 460 core
 
-layout(location = 0) in vec3 position;
+in vec3 position;
+in vec3 colour;
+in vec2 textureCoord;
 
-out vec3 colour;
+out vec3 passColour;
+out vec2 passTextureCoord;
 
 void main() {
     gl_Position = vec4(position, 1.0);
-    colour = vec3((-position.x * 2 + 1) / 4 + (position.y * 2 + 1) / 4, (position.x * 2 + 1) / 4 + (position.y * 2 + 1) / 4, (-position.x * 2 + 1) / 4 + (-position.y * 2 + 1) / 4);
+    passColour = colour;
+    passTextureCoord = textureCoord;
 }

@@ -66,7 +66,7 @@ public class Shader {
         GL20.glUseProgram(0);
     }
 
-    public void destroy() {
+    public void free() {
         GL20.glDeleteProgram(programID);
     }
 }
