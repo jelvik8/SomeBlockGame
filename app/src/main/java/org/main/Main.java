@@ -4,6 +4,7 @@ import org.engine.graphics.*;
 import org.engine.io.*;
 import org.engine.maths.Vector2f;
 import org.engine.maths.Vector3f;
+import org.engine.objects.GameObject;
 import org.lwjgl.glfw.GLFW;
 
 
@@ -28,6 +29,8 @@ public class Main implements Runnable {
                         0, 1, 2,
                         0, 3, 2
                     }, new Material("/textures/beautiful.png"));
+
+    public GameObject object = new GameObject(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1), mesh);
 
     public void start() {
         game = new Thread(this, "game");
@@ -63,6 +66,7 @@ public class Main implements Runnable {
     // Main loop
     private void update() {
         window.update();
+        object.update();
 
         if (Input.isButtonDown(GLFW.GLFW_MOUSE_BUTTON_LEFT)) {
             System.out.println("X: " + Input.getMouseX() + ", Y: " + Input.getMouseY());
@@ -70,7 +74,7 @@ public class Main implements Runnable {
     }
 
     private void render() {
-        renderer.renderMesh(mesh);
+        renderer.renderMesh(object);
         window.swapBuffers();
     }
 

@@ -19,7 +19,7 @@ public class Material {
 
     public void create() {
         try {
-            texture = TextureLoader.getTexture(path.split("[.]")[1], Material.class.getResourceAsStream(path), GL11.GL_LINEAR);
+            texture = TextureLoader.getTexture(path.split("[.]")[1], Material.class.getResourceAsStream(path), GL11.GL_NEAREST);
             width = texture.getWidth();
             height = texture.getHeight();
             textureID = texture.getTextureID();
